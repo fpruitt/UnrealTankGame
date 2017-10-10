@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
 #include "Tank.h"
+#include "Runtime/Engine/Classes/Engine/World.h"
 #include "TankPlayerController.generated.h"
 
 /**
@@ -17,6 +18,20 @@ class BATTLETANK_API ATankPlayerController : public APlayerController
 
 public:
 	ATank* GetControlledTank() const;
+	virtual void Tick(float DeltaTime) override;
 	virtual void BeginPlay() override;
+	void AimTowardsCrosshair();
+	bool GetSightRayHitLocation(FVector& OutLocation) const;
 
+private:
+	UPROPERTY(EditAnywhere)
+	float CrossHairXLocation = 0.5;
+
+	UPROPERTY(EditAnywhere)
+	float CrossHairYLocation = 0.33333;
+
+	UPROPERTY(EditAnywhere)
+	float LineTraceRange = 1000000.;
+
+	bool GetLookVectorHitLocation(FVector LookDirection, FVector& HitLocation) const;
 };
