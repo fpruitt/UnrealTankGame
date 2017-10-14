@@ -4,12 +4,15 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
-#include "Tank.h"
+
 #include "Runtime/Engine/Classes/Engine/World.h"
 #include "TankPlayerController.generated.h"
 
+/// Forward Declerations
+class ATank;
+
 /**
- * 
+ * Player Controller for Tanks controlled by humans, not AI 
  */
 UCLASS()
 class BATTLETANK_API ATankPlayerController : public APlayerController
