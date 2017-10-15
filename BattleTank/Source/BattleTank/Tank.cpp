@@ -55,7 +55,8 @@ void ATank::SetTrackReferences(UTankTrack* LeftTrack, UTankTrack* RightTrack)
 
 void ATank::Fire()
 {
-	bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
+	//bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
+	bool isReloaded = false;
 	if (Barrel && isReloaded) {
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>(
 			ProjectileBlueprint,

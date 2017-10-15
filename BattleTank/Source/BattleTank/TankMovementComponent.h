@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -25,10 +23,12 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Movement)
 	void IntendTurnRight(float Throw);
 
-
 private:
 	UTankTrack* LeftTrack = nullptr;
 	UTankTrack* RightTrack = nullptr;
+
+	// Called from the pathfinding logic from the AI Controllers.
+	virtual void RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed) override;
 
 	
 };

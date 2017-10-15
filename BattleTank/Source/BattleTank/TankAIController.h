@@ -26,4 +26,8 @@ public:
 	ATank* GetPlayerTank() const;
 	virtual void BeginPlay() override;
 	void AimTowardsPlayer();
+
+private:
+	// How close can the AI Tank get before it stops moving towards us.
+	float AcceptanceRadius = 3000;
 };
