@@ -4,6 +4,7 @@
 #include "TankAimingComponent.h"
 #include "TankBarrel.h"
 #include "TankTurret.h"
+#include "TankTrack.h"
 #include "Projectile.h"
 
 // Sets default values
@@ -45,9 +46,14 @@ void ATank::SetTurretReference(UTankTurret * TurretToSet)
 	TankAimingComponent->SetTurretReference(TurretToSet);
 }
 
+void ATank::SetTrackReferences(UTankTrack* LeftTrack, UTankTrack* RightTrack)
+{
+	TankLeftTrack = LeftTrack;
+	TankRightTrack = RightTrack;
+}
+
 void ATank::Fire()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Fire called."));
 	bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
 	if (Barrel && isReloaded) {
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>(

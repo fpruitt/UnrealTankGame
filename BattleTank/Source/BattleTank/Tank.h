@@ -9,6 +9,7 @@
 /// Forward Declerations 
 class UTankBarrel;
 class UTankTurret;
+class UTankTrack;
 class UTankAimingComponent;
 class AProjectile;
 
@@ -42,6 +43,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetTurretReference(UTankTurret* TurretToSet);
 
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void SetTrackReferences(UTankTrack* LeftTrack, UTankTrack* RightTrack);
+
 	UFUNCTION(BlueprintCallable)
 	void Fire();
 
@@ -55,6 +59,8 @@ public:
 
 	// Local Barrel reference for spawning projectilee
 	UTankBarrel* Barrel = nullptr;
+	UTankTrack* TankLeftTrack = nullptr;
+	UTankTrack* TankRightTrack = nullptr;
 	
 	UPROPERTY(EditDefaultsOnly, Category = Firing)
 	float ReloadTimeInSeconds = 3.;
