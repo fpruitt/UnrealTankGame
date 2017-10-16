@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TankPlayerController.h"
+#include "TankAimingComponent.h"
 #include "Tank.h"
 
 void ATankPlayerController::BeginPlay()
@@ -8,11 +9,13 @@ void ATankPlayerController::BeginPlay()
 	Super::BeginPlay();
 	
 	auto ControlledTank = GetControlledTank();
-	if (!ControlledTank) {
-		UE_LOG(LogTemp, Error, TEXT("PlayerController not possessing a tank."));
+	if (!ensure(ControlledTank)) {return;}
+
+	auto AimingComponent = ControlledTank->FindComponentByClass<UTankAimingComponent>();
+	if (ensure(AimingComponent))
+	{
+		FoundAimingComponenet(AimingComponent);
 	}
-	UE_LOG(LogTemp, Warning, TEXT("Controlled Tank: %s"), *ControlledTank->GetName());
-	UE_LOG(LogTemp, Warning, TEXT("PlayerController Begin Play"));
 }
 
 
@@ -29,7 +32,7 @@ ATank* ATankPlayerController::GetControlledTank() const
 
 void ATankPlayerController::AimTowardsCrosshair() {
 	auto ControlledTank = GetControlledTank();
-	if (!ControlledTank) {return;}
+	if (!ensure(ControlledTank)) {return;}
 	// Get World Location through crosshair
 	FVector HitLocation; // Out parameter
 	bool bDidHit = GetSightRayHitLocation(HitLocation);
@@ -44,14 +47,11 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& OutLocation) const {
 	/// Find the crosshair position
 	int32 ViewportSizeX, ViewportSizeY;
 	GetViewportSize(ViewportSizeX, ViewportSizeY);
-	FVector2D ScreenLocation = FVector2D(ViewportSizeX * CrossHairXLocation, ViewportSizeY * CrossHairYLocation);
-	//UE_LOG(LogTemp, Warning, TEXT("ScreenLocation of Crosshair: %s"), *ScreenLocation.ToString());
-	
+	FVector2D ScreenLocation = FVector2D(ViewportSizeX * CrossHairXLocation, ViewportSizeY * CrossHairYLocation);	
 	/// Get Look Direction
 	FVector LookDirection, WorldLocation;
-	if (DeprojectScreenPositionToWorld(ScreenLocation.X, ScreenLocation.Y, WorldLocation, LookDirection)) {
-		//UE_LOG(LogTemp, Warning, TEXT("WorldDirection of Crosshair: %s"), *LookDirection.ToString());
-		/// Line-trace along that look direction, and see what we hit (up to some  max range)
+	if (DeprojectScreenPositionToWorld(ScreenLocation.X, ScreenLocation.Y, WorldLocation, LookDirection)) 
+	{
 		return GetLookVectorHitLocation(LookDirection, OutLocation);
 	}
 	return false;

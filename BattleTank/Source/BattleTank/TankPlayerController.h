@@ -10,6 +10,7 @@
 
 /// Forward Declerations
 class ATank;
+class UTankAimingComponent;
 
 /**
  * Player Controller for Tanks controlled by humans, not AI 
@@ -18,15 +19,22 @@ UCLASS()
 class BATTLETANK_API ATankPlayerController : public APlayerController
 {
 	GENERATED_BODY()
-
 public:
+	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
+	void FoundAimingComponenet(UTankAimingComponent* AimingComponentReference);
+
+protected:
+	UFUNCTION(BlueprintCallable, Category = "Setup")
 	ATank* GetControlledTank() const;
+
+private:
+
+	
 	virtual void Tick(float DeltaTime) override;
 	virtual void BeginPlay() override;
 	void AimTowardsCrosshair();
 	bool GetSightRayHitLocation(FVector& OutLocation) const;
 
-private:
 	UPROPERTY(EditDefaultsOnly)
 	float CrossHairXLocation = 0.5;
 
