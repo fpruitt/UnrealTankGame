@@ -4,12 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
-
 #include "Runtime/Engine/Classes/Engine/World.h"
 #include "TankPlayerController.generated.h"
 
 /// Forward Declerations
-class ATank;
 class UTankAimingComponent;
 
 /**
@@ -23,13 +21,7 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
 	void FoundAimingComponenet(UTankAimingComponent* AimingComponentReference);
 
-protected:
-	UFUNCTION(BlueprintCallable, Category = "Setup")
-	ATank* GetControlledTank() const;
-
 private:
-
-	
 	virtual void Tick(float DeltaTime) override;
 	virtual void BeginPlay() override;
 	void AimTowardsCrosshair();

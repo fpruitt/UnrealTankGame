@@ -10,7 +10,6 @@
 class UTankBarrel;
 class UTankTurret;
 class UTankTrack;
-class UTankAimingComponent;
 class AProjectile;
 
 
@@ -20,27 +19,14 @@ class BATTLETANK_API ATank : public APawn
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this pawn's properties
 	ATank();
 
-	void AimAt(FVector HitLocation);
-
-protected:
-	UPROPERTY(BlueprintReadOnly)
-	UTankAimingComponent* TankAimingComponent = nullptr;
-
 public:	
-	// Called every frame
-	//virtual void Tick(float DeltaTime) override;
-
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetTrackReferences(UTankTrack* LeftTrack, UTankTrack* RightTrack);
 
 	UFUNCTION(BlueprintCallable)
 	void Fire();
-
-	UPROPERTY(EditDefaultsOnly, Category = Firing)
-	float LaunchSpeed = 4000.;
 
 	double LastFireTime = 0.;
 
@@ -58,5 +44,7 @@ public:
 
 private:
 	virtual void BeginPlay() override;
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+	float LaunchSpeed = 4000.;
 
 };
