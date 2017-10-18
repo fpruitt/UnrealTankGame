@@ -9,7 +9,6 @@
 #include "TankAIController.generated.h"
 
 /// Forward Declerations
-class AActor;
 class UTankAimingComponent;
 /**
  * 

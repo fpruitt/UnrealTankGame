@@ -22,8 +22,7 @@ void ATankAIController::Tick(float DeltaTime)
 	AimTowardsTarget();
 
 	//Fire
-	// TODO refactor to not need reference to Tank class
-	//GetPawn()->Fire();
+	GetPawn()->Fire();
 }
 
 

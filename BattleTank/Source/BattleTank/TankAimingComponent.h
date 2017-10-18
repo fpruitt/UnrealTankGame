@@ -10,6 +10,7 @@
 // Forward Declarations 
 class UTankBarrel;
 class UTankTurret;
+class AProjectile;
 
 UENUM()
 enum class EFiringStatus : uint8
@@ -34,18 +35,30 @@ public:
 	//virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	void AimAt(FVector HitLocation);
 
-protected:
-	// Called when the game starts
-	virtual void BeginPlay() override;
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<AProjectile> ProjectileBlueprint;
+
+	UFUNCTION(BlueprintCallable)
+	void Fire();
 
 	UPROPERTY(BlueprintReadOnly, Category = "State")
 	EFiringStatus FiringStatus = EFiringStatus::Locked;
+
+protected:
+	// Called when the game starts
+	virtual void BeginPlay() override;
 
 private:
 	UTankBarrel* Barrel = nullptr;
 	UTankTurret* Turret = nullptr;
 	void MoveBarrelTowards(FVector AimDirection);
-
+	
 	UPROPERTY(EditDefaultsOnly, Category = Firing)
 	float LaunchSpeed = 4000.;
+	
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+	float ReloadTimeInSeconds = 3.;
+	
+	double LastFireTime = 0.;
+
 };
