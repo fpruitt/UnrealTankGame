@@ -22,7 +22,7 @@ void ATankAIController::Tick(float DeltaTime)
 	AimTowardsTarget();
 
 	//Fire
-	GetPawn()->Fire();
+	AimingComponent->Fire();
 }
 
 
