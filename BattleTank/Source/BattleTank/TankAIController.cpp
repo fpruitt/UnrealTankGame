@@ -19,16 +19,10 @@ void ATankAIController::Tick(float DeltaTime)
 	MoveToActor(TargetTank, AcceptanceRadius);
 	
 	// Aim
-	AimTowardsTarget();
-
-	//Fire
-	AimingComponent->Fire();
-}
-
-
-void ATankAIController::AimTowardsTarget() {
-	auto TargetTank = GetWorld()->GetFirstPlayerController()->GetPawn();
 	auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
 	if (!ensure(AimingComponent)) { return; }
 	AimingComponent->AimAt(TargetTank->GetActorLocation());
+
+	//Fire
+	AimingComponent->Fire();
 }
