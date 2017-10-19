@@ -21,11 +21,19 @@ public:
 	UPROPERTY(EditDefaultsOnly)
 	float AccelerationScalar = 4.;
 
-private:
-	UTankTrack();
-	virtual void OnRegister();
-	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
 
+private:
+	virtual void BeginPlay() override;
+	UTankTrack();
+	//virtual void OnRegister();
+	//virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
+	void ApplySidewaysForce();
+	void DriveTrack();
 	// Based on average tank mass of 40kg and a 0-60mph in 10 seconds acceleration. Unit is Newtons.
 	float TrackMaxDrivingForce = 10729000.;
+	float CurrentThrottle = 0.;
+	// OnHit Event Delegate
+	UFUNCTION()
+	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
+
 };
