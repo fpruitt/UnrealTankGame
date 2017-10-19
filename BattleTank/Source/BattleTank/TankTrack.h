@@ -23,6 +23,7 @@ public:
 
 private:
 	UTankTrack();
+	virtual void OnRegister();
 	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
 
 	// Based on average tank mass of 40kg and a 0-60mph in 10 seconds acceleration. Unit is Newtons.
