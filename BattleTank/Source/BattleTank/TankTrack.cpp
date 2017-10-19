@@ -2,6 +2,23 @@
 
 #include "TankTrack.h"
 
+UTankTrack::UTankTrack()
+{
+	PrimaryComponentTick.bCanEverTick = true;
+}
+
+void UTankTrack::OnRegister()
+{
+	Super::OnRegister();
+	PrimaryComponentTick.bCanEverTick = true;
+}
+
+void UTankTrack::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction * ThisTickFunction)
+{
+	UE_LOG(LogTemp, Warning, TEXT("Tank Track Ticking"));
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+}
+
 void UTankTrack::SetThrottle(float Throttle)
 {
 	auto Name = GetName();

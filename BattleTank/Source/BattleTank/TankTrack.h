@@ -22,6 +22,11 @@ public:
 	float AccelerationScalar = 4.;
 
 private:
+	virtual void BeginPlay() override;
+	virtual void OnRegister() override;
+	UTankTrack();
+	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
+
 	// Based on average tank mass of 40kg and a 0-60mph in 10 seconds acceleration. Unit is Newtons.
 	float TrackMaxDrivingForce = 10729000.;
 };

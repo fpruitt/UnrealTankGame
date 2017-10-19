@@ -8,7 +8,7 @@ class UTankTrack;
 /**
  * A component that is responsible for driving a tank's tracks.
  */
-UCLASS(meta = (BlueprintSpawnableComponent))
+UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class BATTLETANK_API UTankMovementComponent : public UNavMovementComponent
 {
 	GENERATED_BODY()
