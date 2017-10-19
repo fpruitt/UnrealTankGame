@@ -22,8 +22,6 @@ public:
 	float AccelerationScalar = 4.;
 
 private:
-	virtual void BeginPlay() override;
-	virtual void OnRegister() override;
 	UTankTrack();
 	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
 
