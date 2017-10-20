@@ -23,6 +23,9 @@ void ATankAIController::Tick(float DeltaTime)
 	if (!ensure(AimingComponent)) { return; }
 	AimingComponent->AimAt(TargetTank->GetActorLocation());
 
-	//Fire
-	AimingComponent->Fire();
+	//Firing Status
+	auto CurrentAimingStatus = AimingComponent->GetFiringStatus();
+	if (CurrentAimingStatus == EFiringStatus::Locked) {
+		AimingComponent->Fire();
+	}
 }
