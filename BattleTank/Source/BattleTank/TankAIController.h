@@ -25,8 +25,9 @@ public:
 
 protected:
 	UTankAimingComponent* AimingComponent = nullptr;
-
-private:
 	// How close can the AI Tank get before it stops moving towards us.
+	UPROPERTY(EditAnywhere, Category = Firing)
 	float AcceptanceRadius = 3000;
+private:
+	
 };

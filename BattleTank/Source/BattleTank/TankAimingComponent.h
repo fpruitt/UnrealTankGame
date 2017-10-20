@@ -17,7 +17,8 @@ enum class EFiringStatus : uint8
 {
 	Locked,
 	Aiming,
-	Reloading
+	Reloading,
+	OutOfAmmo
 };
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -44,6 +45,12 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = "State")
 	EFiringStatus FiringStatus = EFiringStatus::Reloading;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Firing)
+	int32 ShotsRemaining = 3;
+
+	UPROPERTY(EditAnywhere, Category = Firing)
+	bool ThisCanFire = true;
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
@@ -61,7 +68,6 @@ private:
 	
 	UPROPERTY(EditDefaultsOnly, Category = Firing)
 	float ReloadTimeInSeconds = 3.;
-	
 	double LastFireTime;
 	FVector AimDirection;
 
