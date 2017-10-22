@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Particles/ParticleSystemComponent.h"
+#include "PhysicsEngine/RadialForceComponent.h"
+#include "Engine/EngineTypes.h"
 #include "Projectile.generated.h"
 
 UCLASS()
@@ -27,6 +29,9 @@ public:
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	UParticleSystemComponent* ImpactBlast = nullptr;
 
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+	URadialForceComponent* ExplosionForce = nullptr;
+
 	void LaunchProjectile(float Speed);
 protected:
 	// Called when the game starts or when spawned
@@ -36,6 +41,17 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+
+private:
+	// OnHit Event Delegate
+	UFUNCTION()
+	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
+	bool bHasExploded = false;
+	FTimerHandle UniqueTimer;
+
+	void OnTimerExpire();
+	UPROPERTY(EditDefaultsOnly)
+	float DestroyDelay = 10.;
 	
 	
 };
