@@ -9,6 +9,16 @@ ATank::ATank()
 	PrimaryActorTick.bCanEverTick = false;
 }
 
+float ATank::TakeDamage(float DamageAmount, FDamageEvent const & DamageEvent, AController * EventInstigator, AActor * DamageCauser)
+{
+	if (DamageAmount > CurrentHealth) {
+		DamageAmount = CurrentHealth;
+	}
+	CurrentHealth -= DamageAmount;
+	UE_LOG(LogTemp, Warning, TEXT("Hit, new health: %f"), CurrentHealth);
+	return DamageAmount;
+}
+
 void ATank::BeginPlay()
 {
 	Super::BeginPlay(); // Needed for BP Begin Play to run

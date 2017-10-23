@@ -5,9 +5,11 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "GameFramework/ProjectileMovementComponent.h"
+#include "GameFramework/DamageType.h"
 #include "Particles/ParticleSystemComponent.h"
 #include "PhysicsEngine/RadialForceComponent.h"
 #include "Engine/EngineTypes.h"
+#include "Kismet/GameplayStatics.h"
 #include "Projectile.generated.h"
 
 UCLASS()
@@ -52,6 +54,7 @@ private:
 	void OnTimerExpire();
 	UPROPERTY(EditDefaultsOnly)
 	float DestroyDelay = 10.;
-	
+	UPROPERTY(EditDefaultsOnly)
+	float ProjectileDamage = 20.;
 	
 };

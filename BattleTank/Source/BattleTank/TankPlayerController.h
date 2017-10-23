@@ -21,6 +21,9 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
 	void FoundAimingComponenet(UTankAimingComponent* AimingComponentReference);
 
+	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
+	void FoundOwningPawn(APawn* TankFound);
+
 private:
 	virtual void Tick(float DeltaTime) override;
 	virtual void BeginPlay() override;
