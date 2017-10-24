@@ -29,5 +29,9 @@ protected:
 	UPROPERTY(EditAnywhere, Category = Firing)
 	float AcceptanceRadius = 3000;
 private:
+	virtual void SetPawn(APawn* InPawn) override;
 	
+	UFUNCTION()
+	void OnTankDeath();
+
 };
